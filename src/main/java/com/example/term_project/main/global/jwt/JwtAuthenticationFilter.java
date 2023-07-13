@@ -1,4 +1,4 @@
-package com.example.term_project.main;
+package com.example.term_project.main.global.jwt;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +18,7 @@ import java.io.IOException;
 @Slf4j
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtTokenProvider jwtTokenProvider;
-    //
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
@@ -30,7 +30,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             Authentication authentication = jwtTokenProvider.getAuthentication(token);
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
+        // 서블릿 실행 전에 실행
         chain.doFilter(request, response);
+        // 서블릿 실행된 후에 실행
     }
 
     private String resolveToken(HttpServletRequest request) {

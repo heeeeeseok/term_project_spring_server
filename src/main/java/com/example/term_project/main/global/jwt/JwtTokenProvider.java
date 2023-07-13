@@ -1,4 +1,4 @@
-package com.example.term_project.main;
+package com.example.term_project.main.global.jwt;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;

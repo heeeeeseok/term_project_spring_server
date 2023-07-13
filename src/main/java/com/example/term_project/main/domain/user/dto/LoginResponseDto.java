@@ -1,6 +1,6 @@
-package com.example.term_project.main.user.dto;
+package com.example.term_project.main.domain.user.dto;
 
-import com.example.term_project.main.JwtTokenDto;
+import com.example.term_project.main.global.jwt.JwtTokenDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

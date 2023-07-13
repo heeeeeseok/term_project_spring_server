@@ -1,4 +1,4 @@
-package com.example.term_project.main.response;
+package com.example.term_project.main.global.response;
 
 import lombok.Getter;
 

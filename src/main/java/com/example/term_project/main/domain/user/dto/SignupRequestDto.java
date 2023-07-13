@@ -1,4 +1,4 @@
-package com.example.term_project.main.user.dto;
+package com.example.term_project.main.domain.user.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class LoginRequestDto {
+public class SignupRequestDto {
     private String email;
     private String password;
+    private String userName;
 }

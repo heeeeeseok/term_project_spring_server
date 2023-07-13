@@ -1,7 +1,7 @@
-package com.example.term_project.main;
+package com.example.term_project.main.global.jwt;
 
-import com.example.term_project.main.user.data.UserEntity;
-import com.example.term_project.main.user.data.UserRepository;
+import com.example.term_project.main.domain.user.data.UserEntity;
+import com.example.term_project.main.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
@@ -22,7 +22,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<UserEntity> userInfo = userRepository.findByUserName(username);
+        Optional<UserEntity> userInfo = userRepository.findByUserId(Long.parseLong(username));
 
         if (userInfo.isPresent()) {
             return User.withUsername(username)
@@ -31,7 +31,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                     .build();
         }
         else {
-            throw new UsernameNotFoundException("User not found with username: " + username);
+            throw new UsernameNotFoundException("User not found with userId: " + username);
         }
     }
 }

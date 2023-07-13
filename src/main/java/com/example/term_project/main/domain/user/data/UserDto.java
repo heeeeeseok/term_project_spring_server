@@ -1,4 +1,4 @@
-package com.example.term_project.main.user.data;
+package com.example.term_project.main.domain.user.data;
 
 import lombok.Builder;
 import lombok.Getter;

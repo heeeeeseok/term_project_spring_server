@@ -1,4 +1,4 @@
-package com.example.term_project.main;
+package com.example.term_project.main.global.jwt;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
