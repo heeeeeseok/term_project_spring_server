@@ -48,7 +48,7 @@ public class UserController {
             return new BaseResponse<>(e.getErrorCode());
         } catch (Exception e) {
             LOGGER.info(e.getMessage());
-            return  new BaseResponse<>(ResponseCode.INTERNAL_ERROR);
+            return new BaseResponse<>(ResponseCode.INTERNAL_ERROR);
         }
     }
 }

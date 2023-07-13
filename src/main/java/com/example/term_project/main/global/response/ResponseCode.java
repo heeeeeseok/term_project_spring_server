@@ -38,25 +38,6 @@ public enum ResponseCode {
                 .orElse(this.getMessage());
     }
 
-    public static ResponseCode valueOf(HttpStatus httpStatus) {
-        if (httpStatus == null) {
-            throw new ResponseException("HttpStatus is null");
-        }
-
-        return Arrays.stream(values())
-                .filter(errorCode -> errorCode.getHttpStatus() == httpStatus)
-                .findFirst()
-                .orElseGet(() -> {
-                    if (httpStatus.is4xxClientError()) {
-                        return ResponseCode.BAD_REQUEST;
-                    } else if (httpStatus.is5xxServerError()) {
-                        return ResponseCode.INTERNAL_ERROR;
-                    } else {
-                        return ResponseCode.OK;
-                    }
-                });
-    }
-
     @Override
     public String toString() {
         return String.format("%s (%d)", this.name(), this.getCode());

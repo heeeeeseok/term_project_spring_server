@@ -11,7 +11,7 @@ public class BaseResponse<T> {
     private final Boolean success;
     private final Integer code;
     private final String message;
-    private T data;
+    private final T data;
 
     public BaseResponse(T data) {
         this.success = true;
