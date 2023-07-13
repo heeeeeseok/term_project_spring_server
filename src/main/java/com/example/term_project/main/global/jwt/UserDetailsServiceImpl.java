@@ -1,6 +1,6 @@
 package com.example.term_project.main.global.jwt;
 
-import com.example.term_project.main.domain.user.data.UserEntity;
+import com.example.term_project.main.domain.user.entity.UserEntity;
 import com.example.term_project.main.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.AuthorityUtils;

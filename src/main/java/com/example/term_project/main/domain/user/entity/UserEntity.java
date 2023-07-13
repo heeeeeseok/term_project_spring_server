@@ -1,4 +1,4 @@
-package com.example.term_project.main.domain.user.data;
+package com.example.term_project.main.domain.user.entity;
 
 import com.example.term_project.main.global.entity.BaseEntity;
 import lombok.Getter;

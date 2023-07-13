@@ -1,6 +1,6 @@
 package com.example.term_project.main.domain.user;
 
-import com.example.term_project.main.domain.user.data.UserEntity;
+import com.example.term_project.main.domain.user.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
