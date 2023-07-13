@@ -1,6 +1,7 @@
-package com.example.term_project.main.domain.user.data;
+package com.example.term_project.main.domain.user;
 
 import com.example.term_project.main.domain.user.UserRepository;
+import com.example.term_project.main.domain.user.data.UserEntity;
 import com.example.term_project.main.domain.user.dto.LoginResponseDto;
 import com.example.term_project.main.global.jwt.JwtTokenProvider;
 import com.example.term_project.main.global.response.ResponseCode;

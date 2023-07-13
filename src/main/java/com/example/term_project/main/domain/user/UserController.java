@@ -1,6 +1,5 @@
 package com.example.term_project.main.domain.user;
 
-import com.example.term_project.main.domain.user.data.UserService;
 import com.example.term_project.main.domain.user.dto.LoginResponseDto;
 import com.example.term_project.main.global.response.BaseResponse;
 import com.example.term_project.main.global.response.ResponseCode;
