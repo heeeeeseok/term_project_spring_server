@@ -1,6 +1,7 @@
 package com.example.term_project.main.domain.user;
 
 import com.example.term_project.main.domain.user.dto.LoginResponseDto;
+import com.example.term_project.main.domain.user.dto.SearchPostsResponseDto;
 import com.example.term_project.main.global.response.BaseResponse;
 import com.example.term_project.main.global.response.ResponseCode;
 import com.example.term_project.main.global.response.ResponseException;
@@ -9,7 +10,11 @@ import com.example.term_project.main.domain.user.dto.SignupRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -50,5 +55,14 @@ public class UserController {
             LOGGER.info(e.getMessage());
             return new BaseResponse<>(ResponseCode.INTERNAL_ERROR);
         }
+    }
+
+    @GetMapping("/posts")
+    public BaseResponse<List<SearchPostsResponseDto>> searchPosts() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Long userId = Long.parseLong(authentication.getName());
+
+        List<SearchPostsResponseDto> responseList = userService.searchPosts(userId);
+        return new BaseResponse<>(responseList);
     }
 }

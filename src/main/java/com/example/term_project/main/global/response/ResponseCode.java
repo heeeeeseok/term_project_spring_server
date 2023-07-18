@@ -13,8 +13,9 @@ import java.util.function.Predicate;
 public enum ResponseCode {
     OK(0, HttpStatus.OK, "Ok"),
     SIGNUP_WITH_DUPLICATED_EMAIL(1000, HttpStatus.BAD_REQUEST, "중복된 이메일 입니다"),
-    LOGIN_WITH_WRONG_EMAIL(1001, HttpStatus.BAD_REQUEST, "잘못된 이메일 입니다"),
-    LOGIN_WITH_WRONG_PASSWORD(1002, HttpStatus.BAD_REQUEST, "비밀번호가 틀렸습니다"),
+    SIGNUP_WITH_DUPLICATED_USERNAME(1001, HttpStatus.BAD_REQUEST, "중복된 닉네임 입니다"),
+    LOGIN_WITH_WRONG_EMAIL(1002, HttpStatus.BAD_REQUEST, "없는 이메일 입니다"),
+    LOGIN_WITH_WRONG_PASSWORD(1003, HttpStatus.BAD_REQUEST, "비밀번호가 틀렸습니다"),
     BAD_REQUEST(10004, HttpStatus.BAD_REQUEST, "Bad request"),
     VALIDATION_ERROR(10001, HttpStatus.BAD_REQUEST, "Validation error"),
     NOT_FOUND(10002, HttpStatus.NOT_FOUND, "Requested resource is not found"),
