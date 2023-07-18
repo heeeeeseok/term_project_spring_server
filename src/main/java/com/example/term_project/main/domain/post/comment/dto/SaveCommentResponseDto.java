@@ -1,18 +1,15 @@
-package com.example.term_project.main.domain.post.dto;
+package com.example.term_project.main.domain.post.comment.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SavePostRequestDto {
-    private String title;
+public class SaveCommentResponseDto {
+    private String name;
     private String content;
-    private int isAnonymous;
 }

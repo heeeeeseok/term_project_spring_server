@@ -8,6 +8,7 @@ import com.example.term_project.main.global.response.ResponseCode;
 import com.example.term_project.main.global.response.ResponseException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.swing.text.html.Option;
@@ -21,6 +22,7 @@ public class PostService {
     private final PostRepository postRepository;
     private final UserRepository userRepository;
 
+    @Transactional
     public Long savePost(SavePostRequestDto request, MultipartFile multipartFile, Long userId) {
         Optional<UserEntity> userOptional = userRepository.findByUserId(userId);
 
@@ -32,9 +34,11 @@ public class PostService {
             PostEntity newPost = PostEntity.builder()
                     .title(request.getTitle())
                     .content(request.getContent())
+                    .isAnonymous(request.getIsAnonymous())
                     .urlList(list)
                     .commentCount(0)
                     .recommendCount(0)
+                    .commentEntitiyList(new ArrayList<>())
                     .user(user)
                     .build();
 
@@ -44,6 +48,7 @@ public class PostService {
         }
     }
 
+    @Transactional
     public Long editPost(EditPostRequestDto request, MultipartFile multipartFile, Long postId) {
         Optional<PostEntity> postOptional = postRepository.findByPostId(postId);
 
@@ -60,6 +65,7 @@ public class PostService {
         }
     }
 
+    @Transactional
     public Long deletePost(Long postId) {
         Optional<PostEntity> postOptional = postRepository.findByPostId(postId);
 
