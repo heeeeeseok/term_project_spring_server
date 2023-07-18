@@ -5,13 +5,13 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SavePostRequestDto {
+public class EditPostRequestDto {
+
+    private Long postId;
     private String title;
     private String content;
 }
