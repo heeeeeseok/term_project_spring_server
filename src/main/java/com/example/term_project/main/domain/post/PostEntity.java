@@ -21,29 +21,32 @@ import java.util.List;
 @EntityListeners({AuditingEntityListener.class})
 @Table(name = "POSTS")
 public class PostEntity extends BaseEntityWithEditor {
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
+
+    @OneToMany(mappedBy = "post")
+    private List<CommentEntity> commentEntitiyList;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long postId;
+
+    private String editorName;
 
     private String title;
 
     private String content;
 
-    @ElementCollection
-    private List<String> urlList;
-
     @NonNull
     private int isAnonymous;
 
     private int recommendCount;
+
     private int commentCount;
 
+    @ElementCollection
     private List<Long> commentedUserIdList;
 
-    @ManyToOne
-    @JoinColumn(name = "USER_ID")
-    private UserEntity user;
-
-    @OneToMany(mappedBy = "post")
-    private List<CommentEntity> commentEntitiyList;
 }

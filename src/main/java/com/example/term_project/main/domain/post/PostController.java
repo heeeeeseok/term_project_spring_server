@@ -1,6 +1,7 @@
 package com.example.term_project.main.domain.post;
 
 import com.example.term_project.main.domain.post.dto.EditPostRequestDto;
+import com.example.term_project.main.domain.post.dto.PostDto;
 import com.example.term_project.main.domain.post.dto.SavePostRequestDto;
 import com.example.term_project.main.global.response.BaseResponse;
 import com.example.term_project.main.global.response.ResponseCode;
@@ -8,19 +9,31 @@ import com.example.term_project.main.global.response.ResponseException;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 
-@RestController
+
+@Controller
 @RequiredArgsConstructor
 @RequestMapping("/post")
 public class PostController {
 
     private final PostService postService;
     private final Logger LOGGER = LoggerFactory.getLogger(PostController.class);
+
+    @GetMapping("/list")
+    public String getPostList(Model model) {
+        List<PostDto> postList = postService.getPostList();
+        model.addAttribute("postList", postList);
+        return "post_list";
+    }
 
     @PostMapping("/save")
     public BaseResponse<Long> savePost(@RequestPart(value = "savePostReq") SavePostRequestDto request,

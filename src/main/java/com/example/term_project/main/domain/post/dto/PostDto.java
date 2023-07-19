@@ -1,4 +1,4 @@
-package com.example.term_project.main.domain.post.comment.dto;
+package com.example.term_project.main.domain.post.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SaveCommentRequestDto {
-    private Long postId;
+public class PostDto {
+    private String editorName;
+    private String title;
     private String content;
-    private int isAnonymous;
 }

@@ -19,13 +19,14 @@ public class SecurityConfig {
     private static final String[] PERMITTED_URLS = {
             "/user/signup", //회원가입
             "/user/login", //로그인
+            "/user/test",
             "/swagger-ui/**",
             "/v3/api-docs/**"
     };
 
     @Bean
     public SecurityFilterChain filterChain(
-            HttpSecurity http, JwtAuthenticationFilter jwtAuthenticationCheckFilter) throws Exception {
+            HttpSecurity http, JwtAuthenticationFilter jwtAuthenticationFilter) throws Exception {
         http
                 .cors()//CORS 허용 정책(Front , Back 사이에 도메인이 달라지는 경우)
                 .and()
@@ -35,7 +36,7 @@ public class SecurityConfig {
                 .and()
                 .formLogin().disable()  // 서버에서  View를 배포하지 않으므로 disable
                 .httpBasic().disable() // JWT 인증 방식을 사용하기에 httpBasic을 이용한 인증방식 사용 안함
-                .addFilterAfter(jwtAuthenticationCheckFilter, UsernamePasswordAuthenticationFilter.class)//필터 추가
+                .addFilterAfter(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)//필터 추가
                 .authorizeHttpRequests(ant -> ant
                         .antMatchers(PERMITTED_URLS).permitAll() // 해당 문자열 배열에 저장된 uri 요청은 제외
                         .anyRequest().authenticated() // 모든 요청은 Auth 받아야함
@@ -48,7 +49,7 @@ public class SecurityConfig {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
     @Bean
-    public JwtAuthenticationFilter jwtAuthenticationCheckFilter(JwtTokenProvider jwtTokenProvider) {
+    public JwtAuthenticationFilter jwtAuthenticationFilter(JwtTokenProvider jwtTokenProvider) {
         return new JwtAuthenticationFilter(jwtTokenProvider);
     }
 

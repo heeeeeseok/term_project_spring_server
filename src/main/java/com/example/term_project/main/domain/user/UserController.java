@@ -23,7 +23,7 @@ public class UserController {
 
     private final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
     private final UserService userService;
-    @PostMapping("/test")
+    @GetMapping("/test")
     public BaseResponse<Long> test() throws ResponseException {
         return new BaseResponse<>(-1L);
     }

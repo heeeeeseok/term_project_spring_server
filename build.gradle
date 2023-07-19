@@ -47,6 +47,10 @@ dependencies {
 
 	// slf4j
 	implementation 'org.slf4j:slf4j-api:1.7.25'
+
+	// thymeleaf
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
 }
 
 tasks.named('test') {

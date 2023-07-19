@@ -21,6 +21,9 @@ import java.util.List;
 @EntityListeners({AuditingEntityListener.class})
 @Table(name = "USERS")
 public class UserEntity extends BaseEntity {
+    @OneToMany(mappedBy = "user")
+    private List<PostEntity> postList = new ArrayList<>();
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
@@ -34,7 +37,4 @@ public class UserEntity extends BaseEntity {
 
     @Column(unique = true)
     private String userName;
-
-    @OneToMany(mappedBy = "user")
-    private List<PostEntity> postList = new ArrayList<>();
 }
