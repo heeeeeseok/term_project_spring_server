@@ -22,7 +22,7 @@ import java.util.List;
 @Table(name = "POSTS")
 public class PostEntity extends BaseEntityWithEditor {
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
