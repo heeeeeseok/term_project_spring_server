@@ -2,6 +2,7 @@ package com.example.term_project.main.domain.user.entity;
 
 import com.example.term_project.main.domain.post.PostEntity;
 import com.example.term_project.main.global.entity.BaseEntity;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,6 +23,7 @@ import java.util.List;
 @Table(name = "USERS")
 public class UserEntity extends BaseEntity {
     @OneToMany(mappedBy = "user")
+    @Builder.Default
     private List<PostEntity> postList = new ArrayList<>();
 
     @Id

@@ -39,7 +39,6 @@ public class PostEntity extends BaseEntityWithEditor {
 
     private String content;
 
-    @NonNull
     private int isAnonymous;
 
     private int recommendCount;
