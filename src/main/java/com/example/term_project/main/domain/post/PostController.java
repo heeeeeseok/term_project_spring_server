@@ -20,20 +20,13 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 
-@Controller
+@RestController
 @RequiredArgsConstructor
 @RequestMapping("/post")
 public class PostController {
 
     private final PostService postService;
     private final Logger LOGGER = LoggerFactory.getLogger(PostController.class);
-
-    @GetMapping("/list")
-    public String getPostList(Model model) {
-        List<PostDto> postList = postService.getPostList();
-        model.addAttribute("postList", postList);
-        return "post_list";
-    }
 
     @PostMapping("/save")
     public BaseResponse<Long> savePost(@RequestPart(value = "savePostReq") SavePostRequestDto request,
