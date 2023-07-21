@@ -30,7 +30,7 @@ public class PostController {
 
     @PostMapping("/save")
     public BaseResponse<Long> savePost(@RequestPart(value = "savePostReq") SavePostRequestDto request,
-                                       @RequestPart(value = "images", required = false) MultipartFile multipartFile) throws ResponseException {
+                                       @RequestParam(value = "images", required = false) MultipartFile multipartFile) throws ResponseException {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Long userId = Long.parseLong(authentication.getName());
