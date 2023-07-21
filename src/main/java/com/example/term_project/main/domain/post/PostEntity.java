@@ -11,6 +11,7 @@ import lombok.experimental.SuperBuilder;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -38,6 +39,9 @@ public class PostEntity extends BaseEntityWithEditor {
     private String title;
 
     private String content;
+
+    @ElementCollection
+    private List<String> urlList = new ArrayList<>();
 
     private int isAnonymous;
 

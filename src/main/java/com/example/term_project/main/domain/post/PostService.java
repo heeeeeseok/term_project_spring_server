@@ -7,12 +7,14 @@ import com.example.term_project.main.domain.user.UserRepository;
 import com.example.term_project.main.domain.user.entity.UserEntity;
 import com.example.term_project.main.global.response.ResponseCode;
 import com.example.term_project.main.global.response.ResponseException;
+import com.example.term_project.main.global.service.S3UploadService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.swing.text.html.Option;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +25,7 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final UserRepository userRepository;
+    private final S3UploadService s3UploadService;
 
     public List<PostDto> getPostList() {
         List<PostEntity> postEntityList = postRepository.findAll();
@@ -42,8 +45,9 @@ public class PostService {
     }
 
     @Transactional
-    public Long savePost(SavePostRequestDto request, MultipartFile multipartFile, Long userId) {
+    public Long savePost(SavePostRequestDto request, List<MultipartFile> multipartFiles, Long userId) {
         Optional<UserEntity> userOptional = userRepository.findByUserId(userId);
+        List<String> urlList = new ArrayList<>();
 
         if (userOptional.isPresent()) {
             UserEntity user = userOptional.get();
@@ -52,10 +56,18 @@ public class PostService {
                 editorName = "익명";
             }
 
+            try {
+                for (MultipartFile file : multipartFiles)
+                    urlList.add(s3UploadService.saveFile(file));
+            } catch (IOException e) {
+                throw new ResponseException(ResponseCode.BAD_REQUEST);
+            }
+
             PostEntity newPost = PostEntity.builder()
                     .title(request.getTitle())
                     .content(request.getContent())
                     .editorName(editorName)
+                    .urlList(urlList)
                     .isAnonymous(request.getIsAnonymous())
                     .commentCount(0)
                     .recommendCount(0)

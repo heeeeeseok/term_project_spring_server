@@ -30,13 +30,13 @@ public class PostController {
 
     @PostMapping("/save")
     public BaseResponse<Long> savePost(@RequestPart(value = "savePostReq") SavePostRequestDto request,
-                                       @RequestParam(value = "images", required = false) MultipartFile multipartFile) throws ResponseException {
+                                       @RequestParam(value = "images", required = false) List<MultipartFile> multipartFiles) throws ResponseException {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Long userId = Long.parseLong(authentication.getName());
 
         try {
-            Long postId = postService.savePost(request, multipartFile, userId);
+            Long postId = postService.savePost(request, multipartFiles, userId);
             return new BaseResponse<>(postId);
         } catch (ResponseException e) {
             return new BaseResponse<>(e.getErrorCode());
