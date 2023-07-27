@@ -9,6 +9,7 @@ import lombok.NonNull;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -41,7 +42,8 @@ public class PostEntity extends BaseEntityWithEditor {
     private String content;
 
     @ElementCollection
-    private List<String> urlList = new ArrayList<>();
+    @Nullable
+    private List<String> urlList;
 
     private int isAnonymous;
 
