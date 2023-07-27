@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.swing.text.html.Option;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,10 +36,14 @@ public class PostService {
 
         for (PostEntity entity : postEntityList) {
             PostDto newPostDto = PostDto.builder()
+                    .postId(entity.getPostId())
                     .editorName(entity.getEditorName())
                     .title(entity.getTitle())
                     .content(entity.getContent())
                     .profileImageUrl(entity.getUser().getProfileImageUrl())
+                    .commentCount(entity.getCommentCount())
+                    .recommendCount(entity.getRecommendCount())
+                    .urlList(entity.getUrlList())
                     .build();
 
             postDtoList.add(newPostDto);
@@ -62,12 +65,9 @@ public class PostService {
             }
 
             if (multipartFiles != null) {
-                LOGGER.info("multipartFiles not null");
                 try {
                     for (MultipartFile file : multipartFiles) {
-                        LOGGER.info("before service");
                         urlList.add(s3UploadService.saveFile(file));
-                        LOGGER.info("after service");
                     }
                 } catch (IOException e) {
                     throw new ResponseException(ResponseCode.BAD_REQUEST);

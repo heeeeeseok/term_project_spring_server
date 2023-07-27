@@ -22,21 +22,11 @@ public class S3UploadService {
     private String bucket;
 
     public String saveFile(MultipartFile multipartFile) throws IOException {
-        LOGGER.info("debug1");
         String originalFilename = multipartFile.getOriginalFilename();
-        LOGGER.info("debug2");
-
         ObjectMetadata metadata = new ObjectMetadata();
-        LOGGER.info("debug3");
-
         metadata.setContentLength(multipartFile.getSize());
-        LOGGER.info("debug4");
-
         metadata.setContentType(multipartFile.getContentType());
-        LOGGER.info("debug5");
-
         amazonS3.putObject(bucket, originalFilename, multipartFile.getInputStream(), metadata);
-        LOGGER.info("debug6");
 
         return amazonS3.getUrl(bucket, originalFilename).toString();
     }
