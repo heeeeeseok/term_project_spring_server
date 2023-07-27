@@ -60,7 +60,7 @@ public class UserService {
 
         if (optionalUserEntity.isPresent()) {
             UserEntity user = optionalUserEntity.get();
-            if (loginReq.getPassword().equals(passwordEncoder.encode(user.getPassword()))) {
+            if (passwordEncoder.matches(loginReq.getPassword(), user.getPassword())) {
                 return LoginResponseDto.builder()
                         .jwtInfo(jwtTokenProvider.generateToken(user.getUserId()))
                         .userId(user.getUserId())
