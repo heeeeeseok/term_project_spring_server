@@ -57,11 +57,13 @@ public class PostService {
                 editorName = "익명";
             }
 
-            try {
-                for (MultipartFile file : multipartFiles)
-                    urlList.add(s3UploadService.saveFile(file));
-            } catch (IOException e) {
-                throw new ResponseException(ResponseCode.BAD_REQUEST);
+            if (multipartFiles != null) {
+                try {
+                    for (MultipartFile file : multipartFiles)
+                        urlList.add(s3UploadService.saveFile(file));
+                } catch (IOException e) {
+                    throw new ResponseException(ResponseCode.BAD_REQUEST);
+                }
             }
 
             PostEntity newPost = PostEntity.builder()
