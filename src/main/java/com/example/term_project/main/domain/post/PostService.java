@@ -9,6 +9,8 @@ import com.example.term_project.main.global.response.ResponseCode;
 import com.example.term_project.main.global.response.ResponseException;
 import com.example.term_project.main.global.service.S3UploadService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+
 @Service
 @RequiredArgsConstructor
 public class PostService {
@@ -26,6 +29,7 @@ public class PostService {
     private final PostRepository postRepository;
     private final UserRepository userRepository;
     private final S3UploadService s3UploadService;
+    private final Logger LOGGER = LoggerFactory.getLogger(PostService.class);
 
     public List<PostDto> getPostList() {
         List<PostEntity> postEntityList = postRepository.findAll();
@@ -58,9 +62,13 @@ public class PostService {
             }
 
             if (multipartFiles != null) {
+                LOGGER.info("multipartFiles not null");
                 try {
-                    for (MultipartFile file : multipartFiles)
+                    for (MultipartFile file : multipartFiles) {
+                        LOGGER.info("before service");
                         urlList.add(s3UploadService.saveFile(file));
+                        LOGGER.info("after service");
+                    }
                 } catch (IOException e) {
                     throw new ResponseException(ResponseCode.BAD_REQUEST);
                 }
