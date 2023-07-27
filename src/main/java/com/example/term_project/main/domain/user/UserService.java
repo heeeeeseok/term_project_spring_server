@@ -36,6 +36,7 @@ public class UserService {
                 .email(signupReq.getEmail())
                 .password(passwordEncoder.encode(signupReq.getPassword()))
                 .userName(signupReq.getUserName())
+                .profileImageUrl("")
                 .build();
 
         Optional<UserEntity> checkDup = userRepository.findByEmail(newUser.getEmail());

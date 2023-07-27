@@ -36,6 +36,7 @@ public class PostService {
                     .editorName(entity.getEditorName())
                     .title(entity.getTitle())
                     .content(entity.getContent())
+                    .profileImageUrl(entity.getUser().getProfileImageUrl())
                     .build();
 
             postDtoList.add(newPostDto);

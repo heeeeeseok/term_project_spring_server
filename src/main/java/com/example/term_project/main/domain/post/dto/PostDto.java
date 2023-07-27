@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PostDto {
     private String editorName;
+    private String profileImageUrl;
     private String title;
     private String content;
 }

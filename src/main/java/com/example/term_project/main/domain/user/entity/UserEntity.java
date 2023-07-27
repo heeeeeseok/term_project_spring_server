@@ -39,4 +39,6 @@ public class UserEntity extends BaseEntity {
 
     @Column(unique = true)
     private String userName;
+
+    private String profileImageUrl;
 }

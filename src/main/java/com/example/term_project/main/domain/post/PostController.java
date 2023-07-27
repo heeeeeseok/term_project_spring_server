@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -27,6 +28,13 @@ public class PostController {
 
     private final PostService postService;
     private final Logger LOGGER = LoggerFactory.getLogger(PostController.class);
+
+    @GetMapping("/print")
+    public BaseResponse<List<PostDto>> getPostList() {
+        List<PostDto> postList = new ArrayList<>();
+        postList = postService.getPostList();
+        return new BaseResponse<>(postList);
+    }
 
     @PostMapping("/save")
     public BaseResponse<Long> savePost(@RequestPart(value = "savePostReq") SavePostRequestDto request,
