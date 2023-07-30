@@ -1,4 +1,4 @@
-package com.example.term_project.main.global.entity;
+package com.example.term_project.main.global.service;
 
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.core.Authentication;
