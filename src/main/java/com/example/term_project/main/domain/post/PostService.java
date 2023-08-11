@@ -7,6 +7,7 @@ import com.example.term_project.main.domain.user.UserRepository;
 import com.example.term_project.main.domain.user.entity.UserEntity;
 import com.example.term_project.main.global.response.ResponseCode;
 import com.example.term_project.main.global.response.ResponseException;
+import com.example.term_project.main.global.service.S3UploadService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +27,7 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final UserRepository userRepository;
+    private final S3UploadService s3UploadService;
     private final Logger LOGGER = LoggerFactory.getLogger(PostService.class);
 
     public List<PostDto> getPostList() {
@@ -62,18 +64,15 @@ public class PostService {
                 editorName = "익명";
             }
 
-            /*
             if (multipartFiles != null) {
                 try {
                     for (MultipartFile file : multipartFiles) {
-                        urlList.add(s3UploadService.saveFile(file));
+                        urlList.add(s3UploadService.uploadFile(file));
                     }
                 } catch (IOException e) {
                     throw new ResponseException(ResponseCode.BAD_REQUEST);
                 }
             }
-
-             */
 
             PostEntity newPost = PostEntity.builder()
                     .title(request.getTitle())
