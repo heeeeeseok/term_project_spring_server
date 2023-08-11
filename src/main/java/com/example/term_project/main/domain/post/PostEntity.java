@@ -42,7 +42,6 @@ public class PostEntity extends BaseEntityWithEditor {
     private String content;
 
     @ElementCollection
-    @Nullable
     private List<String> urlList;
 
     private int isAnonymous;
