@@ -12,23 +12,26 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/user")
 @RequiredArgsConstructor
 public class UserController {
 
     private final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
     private final UserService userService;
-    @GetMapping("/test")
-    public BaseResponse<Long> test() throws ResponseException {
-        return new BaseResponse<>(-1L);
+
+    @GetMapping("/login")
+    public String loginPage() {
+        return "test";
     }
 
     @PostMapping("/signup")
+    @ResponseBody
     public BaseResponse<Long> signup(@RequestBody SignupRequestDto signupReq) throws ResponseException {
         try {
             Long id = userService.signup(signupReq);
@@ -44,6 +47,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
+    @ResponseBody
     public BaseResponse<LoginResponseDto> login(@RequestBody LoginRequestDto loginReq) {
         try {
             LoginResponseDto response = userService.login(loginReq);
@@ -58,6 +62,7 @@ public class UserController {
     }
 
     @GetMapping("/posts")
+    @ResponseBody
     public BaseResponse<List<SearchPostsResponseDto>> searchPosts() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Long userId = Long.parseLong(authentication.getName());

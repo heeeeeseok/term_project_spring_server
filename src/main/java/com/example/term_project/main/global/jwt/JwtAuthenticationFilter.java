@@ -26,13 +26,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String token = resolveToken(request);
         log.info("Jwt Authentication Check Filter token : {}", token);
 
+        // 토큰을 검증하고 SecurityContextHolder에 등록
         if (StringUtils.hasText(token) && jwtTokenProvider.validateToken(token)) {
             Authentication authentication = jwtTokenProvider.getAuthentication(token);
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
-        // 서블릿 실행 전에 실행
+
+        // 다음 필터 실행
         chain.doFilter(request, response);
-        // 서블릿 실행된 후에 실행
     }
 
     private String resolveToken(HttpServletRequest request) {
@@ -43,6 +44,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             // "Bearer "을 제외한 값 리턴
             return bearerToken.substring(7);
         }
+
         return null;
     }
 }

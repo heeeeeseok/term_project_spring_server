@@ -27,7 +27,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (userInfo.isPresent()) {
             return User.withUsername(username)
                     .password(userInfo.get().getPassword())
-                    .authorities(AuthorityUtils.NO_AUTHORITIES)
+                    .authorities(AuthorityUtils.NO_AUTHORITIES) // 권한 없음
                     .build();
         }
         else {
