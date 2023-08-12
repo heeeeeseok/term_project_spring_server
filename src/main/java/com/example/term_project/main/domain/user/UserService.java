@@ -88,8 +88,8 @@ public class UserService {
                 SearchPostsResponseDto response = SearchPostsResponseDto.builder()
                         .title(post.getTitle())
                         .content(post.getContent())
-                        .recommendCount(post.getRecommendCount())
-                        .commentCount(post.getCommentCount())
+                        .recommendCount(post.getRecommendedUserIdList().size())
+                        .commentCount(post.getCommentedUserIdList().size())
                         .build();
 
                 responseList.add(response);
