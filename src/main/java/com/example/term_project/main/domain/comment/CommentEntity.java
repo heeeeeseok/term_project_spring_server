@@ -1,4 +1,4 @@
-package com.example.term_project.main.domain.post.comment;
+package com.example.term_project.main.domain.comment;
 
 import com.example.term_project.main.domain.post.PostEntity;
 import com.example.term_project.main.global.entity.BaseEntityWithEditor;

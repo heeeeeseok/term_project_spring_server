@@ -1,9 +1,8 @@
-package com.example.term_project.main.domain.post.comment;
+package com.example.term_project.main.domain.comment;
 
-import com.example.term_project.main.domain.post.comment.dto.SaveCommentRequestDto;
-import com.example.term_project.main.domain.post.comment.dto.SaveCommentResponseDto;
+import com.example.term_project.main.domain.comment.dto.SaveCommentRequestDto;
+import com.example.term_project.main.domain.comment.dto.SaveCommentResponseDto;
 import com.example.term_project.main.global.response.BaseResponse;
-import com.example.term_project.main.global.response.ResponseCode;
 import com.example.term_project.main.global.response.ResponseException;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.LoggerFactory;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @RestController
 @RequiredArgsConstructor

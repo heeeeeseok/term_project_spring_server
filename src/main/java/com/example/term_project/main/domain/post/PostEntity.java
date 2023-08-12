@@ -1,6 +1,7 @@
 package com.example.term_project.main.domain.post;
 
-import com.example.term_project.main.domain.post.comment.CommentEntity;
+import com.example.term_project.main.domain.comment.CommentEntity;
+import com.example.term_project.main.domain.comment.CommentService;
 import com.example.term_project.main.domain.user.entity.UserEntity;
 import com.example.term_project.main.global.entity.BaseEntityWithEditor;
 import lombok.Getter;
@@ -26,7 +27,7 @@ public class PostEntity extends BaseEntityWithEditor {
     private UserEntity user;
 
     @OneToMany(mappedBy = "post")
-    private List<CommentEntity> commentEntitiyList;
+    private List<CommentEntity> commentEntityList;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,9 +44,8 @@ public class PostEntity extends BaseEntityWithEditor {
 
     private int isAnonymous;
 
-    private int recommendCount;
-
-    private int commentCount;
+    @ElementCollection
+    private List<Long> recommendedUserIdList;
 
     @ElementCollection
     private List<Long> commentedUserIdList;

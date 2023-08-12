@@ -1,9 +1,9 @@
-package com.example.term_project.main.domain.post.comment;
+package com.example.term_project.main.domain.comment;
 
+import com.example.term_project.main.domain.comment.dto.SaveCommentRequestDto;
+import com.example.term_project.main.domain.comment.dto.SaveCommentResponseDto;
 import com.example.term_project.main.domain.post.PostEntity;
 import com.example.term_project.main.domain.post.PostRepository;
-import com.example.term_project.main.domain.post.comment.dto.SaveCommentRequestDto;
-import com.example.term_project.main.domain.post.comment.dto.SaveCommentResponseDto;
 import com.example.term_project.main.domain.user.UserRepository;
 import com.example.term_project.main.domain.user.entity.UserEntity;
 import com.example.term_project.main.global.response.ResponseCode;

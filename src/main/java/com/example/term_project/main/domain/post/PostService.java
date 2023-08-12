@@ -41,8 +41,8 @@ public class PostService {
                     .title(entity.getTitle())
                     .content(entity.getContent())
                     .profileImageUrl(entity.getUser().getProfileImageUrl())
-                    .commentCount(entity.getCommentCount())
-                    .recommendCount(entity.getRecommendCount())
+                    .commentCount(entity.getCommentEntityList().size())
+                    .recommendCount(entity.getRecommendedUserIdList().size())
                     .urlList(entity.getUrlList())
                     .build();
 
@@ -80,9 +80,8 @@ public class PostService {
                     .editorName(editorName)
                     .urlList(urlList)
                     .isAnonymous(request.getIsAnonymous())
-                    .commentCount(0)
-                    .recommendCount(0)
-                    .commentEntitiyList(new ArrayList<>())
+                    .recommendedUserIdList(new ArrayList<>())
+                    .commentEntityList(new ArrayList<>())
                     .user(user)
                     .build();
 
