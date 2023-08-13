@@ -10,8 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EditPostRequestDto {
-
-    private Long postId;
     private String title;
     private String content;
 }

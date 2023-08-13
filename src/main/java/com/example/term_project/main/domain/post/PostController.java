@@ -9,11 +9,8 @@ import com.example.term_project.main.global.response.ResponseException;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -54,15 +51,15 @@ public class PostController {
         }
     }
 
-    @PatchMapping("/edit")
-    public BaseResponse<Long> editPost(@RequestPart(value = "editPostReq") EditPostRequestDto request,
-                                       @RequestPart(value = "images", required = false) MultipartFile multipartFile) throws ResponseException {
+    @PatchMapping("/edit/{postId}")
+    public BaseResponse<Long> editPost(@PathVariable("postId") Long postId,
+            @RequestPart(value = "editPostReq") EditPostRequestDto request,
+            @RequestPart(value = "images", required = false) MultipartFile multipartFile) throws ResponseException {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Long userId = Long.parseLong(authentication.getName());
 
         try {
-            Long postId = postService.editPost(request, multipartFile, request.getPostId());
             return new BaseResponse<>(postId);
         } catch (ResponseException e) {
             return new BaseResponse<>(e.getErrorCode());

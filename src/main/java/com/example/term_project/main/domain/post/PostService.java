@@ -7,7 +7,7 @@ import com.example.term_project.main.domain.user.UserRepository;
 import com.example.term_project.main.domain.user.entity.UserEntity;
 import com.example.term_project.main.global.response.ResponseCode;
 import com.example.term_project.main.global.response.ResponseException;
-import com.example.term_project.main.global.service.S3UploadService;
+import com.example.term_project.main.global.service.S3Service;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +27,7 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final UserRepository userRepository;
-    private final S3UploadService s3UploadService;
+    private final S3Service s3Service;
     private final Logger LOGGER = LoggerFactory.getLogger(PostService.class);
 
     public List<PostDto> getPostList() {
@@ -67,7 +67,7 @@ public class PostService {
             if (multipartFiles != null) {
                 try {
                     for (MultipartFile file : multipartFiles) {
-                        urlList.add(s3UploadService.uploadFile(file));
+                        urlList.add(s3Service.uploadFile(file));
                     }
                 } catch (IOException e) {
                     throw new ResponseException(ResponseCode.BAD_REQUEST);
@@ -92,7 +92,7 @@ public class PostService {
     }
 
     @Transactional
-    public Long editPost(EditPostRequestDto request, MultipartFile multipartFile, Long postId) {
+    public Long editPost(EditPostRequestDto request, List<MultipartFile> multipartFiles, Long postId) {
         Optional<PostEntity> postOptional = postRepository.findByPostId(postId);
 
         if (postOptional.isPresent()) {
@@ -100,7 +100,22 @@ public class PostService {
 
             editedPost.setContent(request.getContent());
             editedPost.setTitle(request.getContent());
-            // TODO : url update
+
+            List<String> newUrlList = new ArrayList<>();
+            try {
+                for (MultipartFile file : multipartFiles) {
+                    newUrlList.add(s3Service.uploadFile(file));
+                }
+                editedPost.setUrlList(newUrlList);
+            } catch (IOException e) {
+                throw new ResponseException(ResponseCode.S3_UPLOAD_FAILED);
+            }
+
+            if (editedPost.getUrlList().size() > 0) {
+                for (String url : editedPost.getUrlList()) {
+                    s3Service.deleteFile(url);
+                }
+            }
 
             return postRepository.save(editedPost).getPostId();
         } else {
@@ -114,6 +129,11 @@ public class PostService {
 
         if (postOptional.isPresent()) {
             PostEntity delPost = postOptional.get();
+            if (delPost.getUrlList().size() > 0) {
+                for (String url : delPost.getUrlList()) {
+                    s3Service.deleteFile(url);
+                }
+            }
             Long delPostId = delPost.getPostId();
             postRepository.deleteById(postId);
 

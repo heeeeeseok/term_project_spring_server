@@ -21,6 +21,10 @@ public enum ResponseCode {
 
     LOGIN_WITH_WRONG_PASSWORD(1003, HttpStatus.BAD_REQUEST, "비밀번호를 확인해 주세요"),
 
+    S3_UPLOAD_FAILED(2001, HttpStatus.INTERNAL_SERVER_ERROR, "파일 업로드 실패"),
+
+    S3_DELETE_FAILED(2002, HttpStatus.INTERNAL_SERVER_ERROR, "파일 삭제 실패"),
+
     BAD_REQUEST(10004, HttpStatus.BAD_REQUEST, "Bad request"),
 
     VALIDATION_ERROR(10001, HttpStatus.BAD_REQUEST, "Validation error"),
