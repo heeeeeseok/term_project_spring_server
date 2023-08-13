@@ -69,8 +69,8 @@ public class PostController {
         }
     }
 
-    @DeleteMapping("/delete")
-    public BaseResponse<Long> deletePost(Long postId) throws ResponseException {
+    @DeleteMapping("/delete/{postId}")
+    public BaseResponse<Long> deletePost(@PathVariable("postId") Long postId) throws ResponseException {
         try {
             Long delPostId = postService.deletePost(postId);
             return new BaseResponse<>(delPostId);
