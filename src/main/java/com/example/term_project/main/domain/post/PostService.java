@@ -106,6 +106,7 @@ public class PostService {
                 for (MultipartFile file : multipartFiles) {
                     newUrlList.add(s3Service.uploadFile(file));
                 }
+
                 editedPost.setUrlList(newUrlList);
             } catch (IOException e) {
                 throw new ResponseException(ResponseCode.S3_UPLOAD_FAILED);
