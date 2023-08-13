@@ -54,13 +54,13 @@ public class PostController {
     @PatchMapping("/edit/{postId}")
     public BaseResponse<Long> editPost(@PathVariable("postId") Long postId,
             @RequestPart(value = "editPostReq") EditPostRequestDto request,
-            @RequestPart(value = "images", required = false) MultipartFile multipartFile) throws ResponseException {
+            @RequestParam(value = "images", required = false) List<MultipartFile> multipartFiles) throws ResponseException {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Long userId = Long.parseLong(authentication.getName());
 
         try {
-            return new BaseResponse<>(postId);
+            return new BaseResponse<>(postService.editPost(request, multipartFiles, postId));
         } catch (ResponseException e) {
             return new BaseResponse<>(e.getErrorCode());
         } catch (Exception e) {

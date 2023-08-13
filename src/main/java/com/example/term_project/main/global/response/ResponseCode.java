@@ -25,6 +25,8 @@ public enum ResponseCode {
 
     S3_DELETE_FAILED(2002, HttpStatus.INTERNAL_SERVER_ERROR, "파일 삭제 실패"),
 
+    S3_DELETE_NOT_FOUND(2003, HttpStatus.BAD_REQUEST, "파일을 찾을 수 없음"),
+
     BAD_REQUEST(10004, HttpStatus.BAD_REQUEST, "Bad request"),
 
     VALIDATION_ERROR(10001, HttpStatus.BAD_REQUEST, "Validation error"),

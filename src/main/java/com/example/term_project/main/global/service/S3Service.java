@@ -44,7 +44,7 @@ public class S3Service {
                 amazonS3.deleteObject(bucket, fileUrl);
             } else {
                 log.debug("fail: Delete File not found");
-                throw new ResponseException(ResponseCode.S3_DELETE_FAILED);
+                throw new ResponseException(ResponseCode.S3_DELETE_NOT_FOUND);
             }
         } catch (Exception e) {
             log.debug("fail: Delete File failed", e);
