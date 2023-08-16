@@ -3,7 +3,6 @@ package com.example.term_project.main.global.service;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
-import com.example.term_project.main.domain.post.PostService;
 import com.example.term_project.main.global.response.ResponseCode;
 import com.example.term_project.main.global.response.ResponseException;
 import lombok.RequiredArgsConstructor;
@@ -11,13 +10,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 @Service
